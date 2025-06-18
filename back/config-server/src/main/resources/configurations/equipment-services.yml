@@ -10,10 +10,10 @@ server:
 
 spring:
   application:
-    name: salle-service
+    name: equipment-services
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/salles
+    url: jdbc:postgresql://localhost:5432/equipement
     username: postgres
     password: admin
   jpa:
