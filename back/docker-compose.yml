@@ -1,0 +1,108 @@
+x-common-environment: &common-env
+  SPRING_CONFIG_IMPORT: optional:configserver:http://config-server:8888
+
+x-common-db-env: &db-env
+  SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mygym
+  SPRING_DATASOURCE_USERNAME: postgres
+  SPRING_DATASOURCE_PASSWORD: admin
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: mygym
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - mygym-net
+
+  config-server:
+    build: ./config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - mygym-net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  discovery:
+    build: ./discovery
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-server
+    environment:
+      <<: *common-env
+    restart: on-failure
+    networks:
+      - mygym-net
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - config-server
+      - discovery
+    environment:
+      <<: *common-env
+    networks:
+      - mygym-net
+
+  user-services:
+    build: ./user-services
+    ports:
+      - "8090:8090"
+    depends_on:
+      - config-server
+      - discovery
+      - db
+    environment:
+      <<: [*common-env, *db-env]
+    command: [ "java", "-jar", "app.jar" ]
+    restart: on-failure
+    networks:
+      - mygym-net
+
+  salle-services:
+    build: ./salle-services
+    ports:
+      - "8091:8091"
+    depends_on:
+      - config-server
+      - discovery
+      - db
+    environment:
+      <<: [*common-env, *db-env]
+    command: [ "java", "-jar", "app.jar" ]
+    restart: on-failure
+    networks:
+      - mygym-net
+
+  equipment-services:
+    build: ./equipment-services
+    ports:
+      - "8092:8092"
+    depends_on:
+      - config-server
+      - discovery
+      - db
+    environment:
+      <<: [*common-env, *db-env]
+    command: [ "java", "-jar", "app.jar" ]
+    restart: on-failure
+    networks:
+      - mygym-net
+
+networks:
+  mygym-net:
+    driver: bridge
+volumes:
+  pgdata:

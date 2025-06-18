@@ -1,9 +1,11 @@
 eureka:
   client:
     register-with-eureka: false
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
 
 server:
-  port: 8222
+  port: 8080
 
 spring:
   application:

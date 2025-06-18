@@ -2,7 +2,7 @@ package com.fabien.salle_services.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+
 
 @Entity
 @Data
