@@ -13,9 +13,7 @@ public class Equipment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "salles_id", referencedColumnName = "id", nullable = false)
-    private Salle salle;
+    private Long salleId;
 
     private String nom;
     private Integer statut;
