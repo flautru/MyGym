@@ -1,0 +1,3 @@
+com\fabien\logging\LogEvent.class
+com\fabien\logging\KafkaLogProducer.class
+com\fabien\logging\KafkaProducerConfig.class

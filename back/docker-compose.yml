@@ -80,7 +80,10 @@ services:
       - discovery
       - db
     environment:
-      <<: [*common-env, *db-env]
+      SPRING_CONFIG_IMPORT: optional:configserver:http://config-server:8888
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mygym
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
     command: [ "java", "-jar", "app.jar" ]
     restart: on-failure
     networks:

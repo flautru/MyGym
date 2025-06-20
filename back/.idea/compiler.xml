@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="logging-lib" />
         <module name="gateway" />
         <module name="discovery" />
       </profile>
@@ -19,18 +20,22 @@
         </processorPath>
         <module name="user-services" />
         <module name="salle-services" />
+        <module name="equipment-services" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="equipment-services" target="21" />
+      <module name="back" target="21" />
+      <module name="microservices-root" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="back" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="discovery" options="-parameters" />
       <module name="equipment-services" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="logging-lib" options="-parameters" />
       <module name="salle-services" options="-parameters" />
       <module name="user-services" options="-parameters" />
     </option>
