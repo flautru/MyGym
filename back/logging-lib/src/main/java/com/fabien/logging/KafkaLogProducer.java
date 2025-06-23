@@ -17,6 +17,7 @@ public class KafkaLogProducer {
             LogEvent log = new LogEvent(service, level, message);
             String json = objectMapper.writeValueAsString(log);
             kafkaTemplate.send("logs", json);
+
         } catch (Exception e) {
             e.printStackTrace(); // évite les crashs silencieux
         }

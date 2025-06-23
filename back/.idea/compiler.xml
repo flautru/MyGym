@@ -25,6 +25,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="back" target="21" />
+      <module name="log-consumer" target="21" />
       <module name="microservices-root" target="1.5" />
     </bytecodeTargetLevel>
   </component>
@@ -35,6 +36,7 @@
       <module name="discovery" options="-parameters" />
       <module name="equipment-services" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="log-consumer" options="-parameters" />
       <module name="logging-lib" options="-parameters" />
       <module name="salle-services" options="-parameters" />
       <module name="user-services" options="-parameters" />

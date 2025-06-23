@@ -14,7 +14,15 @@ spring:
     gateway:
       mvc:
         routes:
-          - id: exemple
+          - id: usersApi
             uri: http://localhost:8090
             predicates:
-              - Path=/api/v1/exemple/**
+              - Path=/api/users/**
+          - id: sallesApi
+            uri: http://localhost:8091
+            predicates:
+              - Path=/api/salles/**
+          - id: equipmentApi
+            uri: http://localhost:8092
+            predicates:
+              - Path=/api/equipments/**
