@@ -12,17 +12,32 @@ spring:
     name: gateway
   cloud:
     gateway:
-      mvc:
-        routes:
-          - id: usersApi
-            uri: http://localhost:8090
-            predicates:
-              - Path=/api/users/**
-          - id: sallesApi
-            uri: http://localhost:8091
-            predicates:
-              - Path=/api/salles/**
-          - id: equipmentApi
-            uri: http://localhost:8092
-            predicates:
-              - Path=/api/equipments/**
+      globalcors:
+        cors-configurations:
+          '[/**]': # pour tous les chemins
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      routes:
+        - id: usersApi
+          uri: lb://user-services
+          predicates:
+            - Path=/api/users/**
+        - id: sallesApi
+          uri: http://salle-services:8091
+          predicates:
+            - Path=/api/salles/**
+        - id: equipmentApi
+          uri: http://equipment-services:8092
+          predicates:
+            - Path=/api/equipments/**
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
