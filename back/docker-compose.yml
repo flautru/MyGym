@@ -128,6 +128,21 @@ services:
     networks:
       - mygym-net
 
+  reservation:
+    build: ./reservation
+    ports:
+      - "8093:8093"
+    depends_on:
+      - config-server
+      - discovery
+      - db
+    environment:
+      <<: [ *common-env, *db-env ]
+    command: [ "java", "-jar", "app.jar" ]
+    restart: on-failure
+    networks:
+      - mygym-net
+
 networks:
   mygym-net:
     driver: bridge
