@@ -18,7 +18,7 @@ export interface User {
 })
 export class UserService {
 
-   private apiUrl = 'http://localhost:8080/api/users'; // à adapter selon ton backend
+  private apiUrl = 'http://localhost:8080/api/users'; // à adapter selon ton backend
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {

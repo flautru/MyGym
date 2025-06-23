@@ -1,9 +1,9 @@
-import { App } from './../../app';
+import { App } from '../../../app';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
-import { UserService, User } from '../../services/userService/user-service';
+import { UserService, User } from '../../../services/userService/user-service';
 
 @Component({
   selector: 'app-users',

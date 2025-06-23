@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { UserService, User } from '../../services/userService/user-service';
+import { UserService, User } from '../../../services/userService/user-service';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
