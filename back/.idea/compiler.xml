@@ -6,22 +6,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
         <module name="config-server" />
         <module name="logging-lib" />
-        <module name="gateway" />
-        <module name="discovery" />
+        <module name="discovery-service" />
       </profile>
-      <profile name="Annotation profile for reservation" enabled="true">
+      <profile name="Annotation profile for salle-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="salle-service" />
+        <module name="equipment-service" />
+        <module name="booking-service" />
+      </profile>
+      <profile name="Annotation profile for user-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
-        <module name="reservation" />
-        <module name="user-services" />
-        <module name="salle-services" />
-        <module name="equipment-services" />
+        <module name="user-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,16 +41,16 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="back" options="-parameters" />
+      <module name="booking-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
-      <module name="discovery" options="-parameters" />
-      <module name="equipment-services" options="-parameters" />
-      <module name="gateway" options="-parameters" />
+      <module name="discovery-service" options="-parameters" />
+      <module name="equipment-service" options="-parameters" />
       <module name="log-consumer" options="-parameters" />
       <module name="logging-lib" options="-parameters" />
-      <module name="reservation" options="-parameters" />
-      <module name="salle-services" options="-parameters" />
-      <module name="user-services" options="-parameters" />
+      <module name="salle-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
     </option>
   </component>
 </project>

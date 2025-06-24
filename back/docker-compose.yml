@@ -20,30 +20,6 @@ services:
     networks:
       - mygym-net
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.6.0
-    container_name: zookeeper
-    ports:
-      - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-
-  kafka:
-    image: confluentinc/cp-kafka:7.6.0
-    container_name: kafka
-    ports:
-      - "9092:9092"
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
-
   config-server:
     build: ./config-server
     ports:
@@ -56,8 +32,8 @@ services:
       timeout: 3s
       retries: 5
 
-  discovery:
-    build: ./discovery
+  discovery-service:
+    build: ./discovery-service
     ports:
       - "8761:8761"
     depends_on:
@@ -68,25 +44,25 @@ services:
     networks:
       - mygym-net
 
-  gateway:
-    build: ./gateway
+  api-gateway:
+    build: ./api-gateway
     ports:
       - "8080:8080"
     depends_on:
       - config-server
-      - discovery
+      - discovery-service
     environment:
       <<: *common-env
     networks:
       - mygym-net
 
-  user-services:
-    build: ./user-services
+  user-service:
+    build: ./user-service
     ports:
       - "8090:8090"
     depends_on:
       - config-server
-      - discovery
+      - discovery-service
       - db
     environment:
       <<: [*common-env, *db-env]
@@ -95,13 +71,13 @@ services:
     networks:
       - mygym-net
 
-  salle-services:
-    build: ./salle-services
+  salle-service:
+    build: ./salle-service
     ports:
       - "8091:8091"
     depends_on:
       - config-server
-      - discovery
+      - discovery-service
       - db
     environment:
       SPRING_CONFIG_IMPORT: optional:configserver:http://config-server:8888
@@ -113,13 +89,13 @@ services:
     networks:
       - mygym-net
 
-  equipment-services:
-    build: ./equipment-services
+  equipment-service:
+    build: ./equipment-service
     ports:
       - "8092:8092"
     depends_on:
       - config-server
-      - discovery
+      - discovery-service
       - db
     environment:
       <<: *db-env
@@ -128,13 +104,13 @@ services:
     networks:
       - mygym-net
 
-  reservation:
-    build: ./reservation
+  booking-service:
+    build: ./booking-service
     ports:
       - "8093:8093"
     depends_on:
       - config-server
-      - discovery
+      - discovery-service
       - db
     environment:
       <<: [ *common-env, *db-env ]

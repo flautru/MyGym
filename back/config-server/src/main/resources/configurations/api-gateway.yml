@@ -1,0 +1,44 @@
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka/
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # pour tous les chemins
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      routes:
+        - id: usersApi
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+        - id: sallesApi
+          uri: http://salle-service:8091
+          predicates:
+            - Path=/api/salles/**
+        - id: equipmentApi
+          uri: http://equipment-service:8092
+          predicates:
+            - Path=/api/equipments/**
+        - id: reservationApi
+          uri: http://booking-serivce:8093
+          predicates:
+            - Path=/api/bookings/**
+
