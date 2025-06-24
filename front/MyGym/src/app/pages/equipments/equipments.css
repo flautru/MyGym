@@ -1,0 +1,10 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.equipment-card {
+  width: 300px;
+}

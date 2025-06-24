@@ -122,7 +122,7 @@ services:
       - discovery
       - db
     environment:
-      <<: [*common-env, *db-env]
+      <<: *db-env
     command: [ "java", "-jar", "app.jar" ]
     restart: on-failure
     networks:

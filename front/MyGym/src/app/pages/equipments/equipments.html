@@ -1,1 +1,23 @@
-<p>equipments works!</p>
+<div class="cards-container" appearance="outlined">
+  <mat-card *ngFor="let equipment of equipments" class="equipment-card">
+    <mat-card-header>
+      <mat-card-title>{{ equipment.nom }}</mat-card-title>
+      <mat-card-subtitle>Musculation</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="" alt="{{ equipment.nom }}">
+    <mat-card-content>
+      <p>Statut :
+        <strong [ngStyle]="{ color: equipment.statut === 0 ? 'green' : 'red' }">
+          {{ equipment.statut }}
+        </strong>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary"
+              [disabled]="equipment.statut !== 0"
+              (click)="onReserve(equipment)">
+        Réserver
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

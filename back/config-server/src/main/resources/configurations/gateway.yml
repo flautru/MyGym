@@ -36,8 +36,9 @@ spring:
         - id: equipmentApi
           uri: http://equipment-services:8092
           predicates:
-            - Path=/api/equipments/**
+            - Path=/api/equipements/**
+        - id: reservationApi
+          uri: http://reservation:8093
+          predicates:
+            - Path=/api/bookings/**
 
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG

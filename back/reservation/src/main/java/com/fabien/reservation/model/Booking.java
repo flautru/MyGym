@@ -20,11 +20,6 @@ public class Booking {
     private Long equipmentId;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-
-    @Enumerated(EnumType.STRING)
     private String status;
 
-    public enum Status {
-        PENDING, CONFIRMED, CANCELLED
-    }
 }
