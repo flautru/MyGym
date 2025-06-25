@@ -4,11 +4,11 @@ eureka:
       defaultZone: http://discovery-service:8761/eureka/
 
 server:
-  port: 8090
+  port: 8093
 
 spring:
   application:
-    name: reservation
+    name: booking-service
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${SPRING_DATASOURCE_URL}

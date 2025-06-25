@@ -14,7 +14,7 @@ export interface Equipment {
 })
 export class EquipmentServices {
 
-    private apiUrl = 'http://localhost:8080/api/equipements'; // à adapter selon ton backend
+    private apiUrl = 'http://localhost:8080/api/equipments'; // à adapter selon ton backend
   constructor(private http: HttpClient) {}
 
   getEquipments(): Observable<Equipment[]> {

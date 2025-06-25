@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Calendrier de Réservation</h2>
+<mat-dialog-content>
+  <table>
+    <thead>
+      <tr>
+        <th>Heure</th>
+        <th *ngFor="let day of weekDays"> {{day.name}} - {{ day.date.getDate() }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hour of hoursOfDay">
+        <td>{{ hour }}</td>
+        <td *ngFor="let day of weekDays">
+          <button mat-button [disabled]="isSlotBooked(day.date, hour)" (click)="bookSlot(day.date, hour)">
+            {{ isSlotBooked(day.date, hour) ? 'Occupé' : 'Libre' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Fermer</button>
+</mat-dialog-actions>

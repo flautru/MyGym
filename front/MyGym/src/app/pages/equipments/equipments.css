@@ -5,6 +5,19 @@
   justify-content: center;
 }
 
+.equipment-title{
+  color: white;
+}
 .equipment-card {
   width: 300px;
 }
+
+.equipment-img{
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin-left: 75px;
+}
+
+
+

@@ -1,0 +1,11 @@
+:host {
+  display: block;
+
+  width: 100%;
+  max-width: unset;
+}
+
+.mat-mdc-dialog-container {
+    min-width: none;
+    max-width: none;
+}

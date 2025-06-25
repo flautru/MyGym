@@ -1,23 +1,25 @@
 <div class="cards-container" appearance="outlined">
   <mat-card *ngFor="let equipment of equipments" class="equipment-card">
     <mat-card-header>
-      <mat-card-title>{{ equipment.nom }}</mat-card-title>
+      <mat-card-title class="equipment-title">{{ equipment.nom }}</mat-card-title>
       <mat-card-subtitle>Musculation</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="" alt="{{ equipment.nom }}">
+    <img mat-card-image class="equipment-img" [src]="equipment.imageUrl" alt="{{ equipment.nom }}">
     <mat-card-content>
-      <p>Statut :
         <strong [ngStyle]="{ color: equipment.statut === 0 ? 'green' : 'red' }">
-          {{ equipment.statut }}
+          {{ equipment.statut === 0 ? 'Disponible' : 'Indisponible' }}
         </strong>
-      </p>
     </mat-card-content>
+    <div class="equipment-description">
     <mat-card-actions>
       <button mat-raised-button color="primary"
               [disabled]="equipment.statut !== 0"
-              (click)="onReserve(equipment)">
+              (click)="openReservationDialog(equipment)">
         Réserver
       </button>
+      <p>Résa suivante : </p>
     </mat-card-actions>
+      <p>Prochaine reservation : </p>
+    </div>
   </mat-card>
 </div>

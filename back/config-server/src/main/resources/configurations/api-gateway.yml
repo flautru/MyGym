@@ -30,15 +30,15 @@ spring:
           predicates:
             - Path=/api/users/**
         - id: sallesApi
-          uri: http://salle-service:8091
+          uri: lb://salle-service
           predicates:
             - Path=/api/salles/**
         - id: equipmentApi
-          uri: http://equipment-service:8092
+          uri: lb://equipment-service
           predicates:
             - Path=/api/equipments/**
         - id: reservationApi
-          uri: http://booking-serivce:8093
+          uri: lb://booking-service
           predicates:
             - Path=/api/bookings/**
 
