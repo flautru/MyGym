@@ -69,8 +69,6 @@ Eureka Dashboard : http://localhost:8761
 
 🔒 Rôles (Admin / Utilisateur)
 
-📱 Responsive mobile
-
 🧪 Tests unitaires & d'intégration
 
 🚀 Pipeline CI/CD GitHub Actions
