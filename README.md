@@ -34,20 +34,6 @@
 - **Angular Material** – UI moderne et responsive
 - Communication avec l’API Gateway via HTTP
 
----
-
-## 📦 Structure du projet
-mygym/
-│
-├── api-gateway/ → Entrée principale de l’application
-├── discovery-server/ → Eureka Service Discovery
-├── machine-service/ → Gestion des équipements (CRUD, état)
-├── reservation-service/ → Gestion des réservations
-├── frontend/ → Application Angular
-└── docker-compose.yml → Déploiement multi-conteneurs
-
----
-
 ## 🛠️ Lancer le projet localement
 
 ### 1. Prérequis
@@ -62,6 +48,8 @@ mygym/
 ```bash
 # À la racine du projet
 docker-compose up --build
+
+# Ou utilisation du lancement.bat qui lancera les différents services avec des TO afin d'éviter les conflits de démarrage
 ```
 
 ### 3. Accès à l'application
