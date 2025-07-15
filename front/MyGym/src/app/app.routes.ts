@@ -5,6 +5,7 @@ import { Salles } from './pages/salles/get/salles';
 import { Equipments } from './pages/equipments/equipments';
 import { AddUserComponent } from './pages/users/add/add-user';
 import { AddSalle } from './pages/salles/add/add-salle';
+import { EquipmentTableau } from './pages/equipment-tableau/equipment-tableau';
 
 export const routes: Routes = [
   {path: '', component: Home},
@@ -14,5 +15,6 @@ export const routes: Routes = [
   {path: 'salles', component: Salles},
   {path: 'add-salles', component: AddSalle},
   {path: 'equipments', component: Equipments},
+  {path: 'equipments-tab', component: EquipmentTableau},
   {path: '**',redirectTo: ''}
 ];

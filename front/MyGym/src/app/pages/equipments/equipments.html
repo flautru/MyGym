@@ -6,14 +6,14 @@
     </mat-card-header>
     <img mat-card-image class="equipment-img" [src]="equipment.imageUrl" alt="{{ equipment.nom }}">
     <mat-card-content>
-        <strong [ngStyle]="{ color: equipment.statut === 0 ? 'green' : 'red' }">
-          {{ equipment.statut === 0 ? 'Disponible' : 'Indisponible' }}
+        <strong [ngStyle]="{ color: equipment.status === 0 ? 'green' : 'red' }">
+          {{ equipment.status === 0 ? 'Disponible' : 'Indisponible' }}
         </strong>
     </mat-card-content>
     <div class="equipment-description">
     <mat-card-actions>
       <button mat-raised-button color="primary"
-              [disabled]="equipment.statut !== 0"
+              [disabled]="equipment.status !== 0"
               (click)="openReservationDialog(equipment)">
         Réserver
       </button>

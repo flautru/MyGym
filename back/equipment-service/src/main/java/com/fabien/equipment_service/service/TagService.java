@@ -2,12 +2,12 @@ package com.fabien.equipment_service.service;
 
 import com.fabien.equipment_service.model.Tag;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface TagService {
 
-    List<Tag> getAllTag();
+    Set<Tag> getAllTag();
 
     Optional<Tag> getTagById(Long id);
 

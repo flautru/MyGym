@@ -12,8 +12,8 @@ CalendarEventTitleFormatter } from 'angular-calendar';
 import { CalendarUtils } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CommonModule } from '@angular/common';
-import { Equipment } from '../../services/equipment-services/equipment-services';
 import { Booking } from '../../services/bookingService/booking-service';
+import { Equipment } from '../../models/Equipment';
 
 
 @Component({

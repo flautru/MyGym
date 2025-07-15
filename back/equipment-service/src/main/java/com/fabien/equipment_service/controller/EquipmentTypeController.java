@@ -1,5 +1,8 @@
 package com.fabien.equipment_service.controller;
 
+import com.fabien.equipment_service.dto.EquipmentTypeRequest;
+import com.fabien.equipment_service.dto.EquipmentTypeResponse;
+import com.fabien.equipment_service.mapper.EquipmentTypeMapper;
 import com.fabien.equipment_service.model.EquipmentType;
 import com.fabien.equipment_service.service.EquipmentTypeService;
 import jakarta.validation.Valid;
@@ -17,24 +20,27 @@ import java.util.List;
 @Slf4j
 public class EquipmentTypeController {
 
-    protected static final String BASE_URL = "/api/equipments_types";
+    protected static final String BASE_URL = "/api/equipments-types";
     private final EquipmentTypeService equipmentTypeService;
+    private final EquipmentTypeMapper equipmentTypeMapper;
 
     @GetMapping
-    public ResponseEntity<List<EquipmentType>> getAllEquipmentTypes() {
+    public ResponseEntity<List<EquipmentTypeResponse>> getAllEquipmentTypes() {
         log.debug("GET {} - Récupération de tous les EquipmentTypes", BASE_URL);
         List<EquipmentType> equipmentTypes = equipmentTypeService.getAllEquipmentsType();
-        log.debug("Récupération réussie : {} equipmentTypes trouvés", equipmentTypes.size());
-        return ResponseEntity.ok(equipmentTypes);
+        List<EquipmentTypeResponse> equipmentTypeResponses = equipmentTypes.stream().map(equipmentTypeMapper::toResponse).toList();
+        log.debug("Récupération réussie : {} equipmentTypes trouvés", equipmentTypeResponses.size());
+
+        return ResponseEntity.ok(equipmentTypeResponses);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EquipmentType> getEquipmentTypeById(@PathVariable Long id) {
+    public ResponseEntity<EquipmentTypeResponse> getEquipmentTypeById(@PathVariable Long id) {
         log.debug("GET {} /{} - Récupération de equipmentType", BASE_URL, id);
         return equipmentTypeService.getEquipmentTypeById(id)
                 .map(equipmentType -> {
                     log.debug("EquipmentType trouvé : {} ({})", equipmentType.getLabel(), equipmentType.getId());
-                    return ResponseEntity.ok(equipmentType);
+                    return ResponseEntity.ok(equipmentTypeMapper.toResponse(equipmentType));
                 })
                 .orElseGet(() -> {
                     log.warn("EquipmentType non trouvé pour l'ID : {}", id);
@@ -43,25 +49,26 @@ public class EquipmentTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<EquipmentType> createEquipmentType(@Valid @RequestBody EquipmentType equipmentType) {
-        log.debug("POST {} - Création d'un nouveau equipmentType : {}", BASE_URL, equipmentType.getLabel());
-        EquipmentType created = equipmentTypeService.createEquipmentType(equipmentType);
+    public ResponseEntity<EquipmentTypeResponse> createEquipmentType(@Valid @RequestBody EquipmentTypeRequest equipmentTypeRequest) {
+        log.debug("POST {} - Création d'un nouveau equipmentType : {}", BASE_URL, equipmentTypeRequest.getLabel());
 
-        log.info("EquipmentType créé avec succès : {} (ID = {})", equipmentType.getLabel(), equipmentType.getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        EquipmentType created = equipmentTypeService.createEquipmentType(equipmentTypeMapper.toEntity(equipmentTypeRequest));
+
+        log.info("EquipmentType créé avec succès : {} (ID = {})", created.getLabel(), created.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(equipmentTypeMapper.toResponse(created));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EquipmentType> updateEquipmentType(
+    public ResponseEntity<EquipmentTypeResponse> updateEquipmentType(
             @PathVariable Long id,
-            @Valid @RequestBody EquipmentType equipmentType) {
+            @Valid @RequestBody EquipmentTypeRequest equipmentTypeRequest) {
 
         log.debug("PUT {}/{} - Mise à jour de equipmentType", BASE_URL, id);
-        equipmentType.setId(id);
-        EquipmentType updated = equipmentTypeService.updateEquipmentType(equipmentType);
+
+        EquipmentType updated = equipmentTypeService.updateEquipmentType(equipmentTypeMapper.toEntity(equipmentTypeRequest));
         log.info("EquipmentType mis à jour avec succès : {} (ID = {})", updated.getLabel(), id);
 
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.ok(equipmentTypeMapper.toResponse(updated));
     }
 
     @DeleteMapping("/{id}")

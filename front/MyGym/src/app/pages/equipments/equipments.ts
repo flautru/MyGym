@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Equipment, EquipmentServices } from '../../services/equipment-services/equipment-services';
+import { EquipmentServices } from '../../services/equipment-services/equipment-services';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { BookingDialog } from '../../component/booking-dialog/booking-dialog';
+import { Equipment } from '../../models/Equipment';
 
 @Component({
   selector: 'app-equipments',
