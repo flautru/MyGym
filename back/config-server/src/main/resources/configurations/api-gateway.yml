@@ -36,7 +36,7 @@ spring:
         - id: equipmentApi
           uri: lb://equipment-service
           predicates:
-            - Path=/api/equipments/**
+            - Path=/api/**
         - id: reservationApi
           uri: lb://booking-service
           predicates:
