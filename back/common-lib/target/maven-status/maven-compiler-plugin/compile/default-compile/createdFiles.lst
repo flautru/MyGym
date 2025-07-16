@@ -1,0 +1,3 @@
+com\fabien\common\security\UserDetailsServiceAdapter.class
+com\fabien\common\security\JwtAuthenticationFilter.class
+com\fabien\common\security\JwtService.class

@@ -15,6 +15,10 @@ export class EquipmentServices {
     return this.http.get<Equipment[]>(this.apiUrl);
   }
 
+    getEquipmentById(id: number): Observable<Equipment> {
+    return this.http.get<Equipment>(`${this.apiUrl}/${id}`);
+  }
+
 
   addEquipments(user: Equipment): Observable<Equipment> {
     return this.http.post<Equipment>(this.apiUrl, user);

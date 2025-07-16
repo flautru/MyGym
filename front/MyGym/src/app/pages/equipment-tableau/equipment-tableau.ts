@@ -6,6 +6,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatBadgeModule} from '@angular/material/badge';
 import { Equipment } from '../../models/Equipment';
 import { EquipmentServices } from '../../services/equipment-services/equipment-services';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-equipment-tableau',
   imports: [MatTableModule, MatButtonModule, MatIconModule, MatChipsModule, MatBadgeModule],
@@ -14,11 +16,11 @@ import { EquipmentServices } from '../../services/equipment-services/equipment-s
 })
 export class EquipmentTableau implements OnInit{
   dataSource: Equipment[] = [];
-  columnsToDisplay = ['nom', 'type', 'status'];
+  columnsToDisplay = ['nom', 'type', 'status', 'reservation'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: Equipment | null = null;
 
-  constructor(private equipmentService: EquipmentServices) {}
+  constructor(private equipmentService: EquipmentServices, private router: Router) {}
     ngOnInit() {
     // Ici vous pourrez appeler votre service pour récupérer les équipements
     this.loadEquipments();
@@ -62,4 +64,9 @@ export class EquipmentTableau implements OnInit{
       default: return '';
     }
   }
+
+  goToBooking(equipment: any) {
+  console.log("Equipment : " + equipment);
+  this.router.navigate(['/booking', equipment.id]);
+}
 }

@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class EquipmentTypeController {
 
-    protected static final String BASE_URL = "/api/equipments-types";
+    protected static final String BASE_URL = "/api/equipments/types";
     private final EquipmentTypeService equipmentTypeService;
     private final EquipmentTypeMapper equipmentTypeMapper;
 

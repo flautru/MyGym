@@ -24,6 +24,15 @@
     </td>
   </ng-container>
 
+    <ng-container matColumnDef="reservation">
+    <th mat-header-cell *matHeaderCellDef>Reservation</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="goToBooking(element)">
+        Réserver
+      </button>
+    </td>
+  </ng-container>
+
   <!-- Colonne Expand -->
   <ng-container matColumnDef="expand">
     <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>

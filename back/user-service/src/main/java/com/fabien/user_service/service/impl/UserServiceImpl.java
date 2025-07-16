@@ -1,29 +1,23 @@
 package com.fabien.user_service.service.impl;
 
-import com.fabien.logging.KafkaLogProducer;
 import com.fabien.user_service.model.User;
 import com.fabien.user_service.repository.UserRepository;
 import com.fabien.user_service.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final KafkaLogProducer kafkaLogProducer;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    public UserServiceImpl(KafkaLogProducer kafkaLogProducer) {
-        this.kafkaLogProducer = kafkaLogProducer;
-    }
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public List<User> getAllUsers() {
-        kafkaLogProducer.sendLog("user-services", "INFO", "Demande de tous les utilisateurs");
         return userRepository.findAll();
     }
 
@@ -32,6 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User saveUser(User users) {
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
         return userRepository.save(users);
     }
 
@@ -39,4 +34,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    public Optional<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

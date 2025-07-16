@@ -104,6 +104,21 @@ services:
     networks:
       - mygym-net
 
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "8094:8094"
+    depends_on:
+      - config-server
+      - discovery-service
+      - db
+    environment:
+      <<: *db-env
+    command: [ "java", "-jar", "app.jar" ]
+    restart: on-failure
+    networks:
+      - mygym-net
+
   booking-service:
     build: ./booking-service
     ports:

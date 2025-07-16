@@ -20,7 +20,7 @@ import java.util.Set;
 @Slf4j
 public class TagController {
 
-    protected static final String BASE_URL = "/api/tags";
+    protected static final String BASE_URL = "/api/equipments/tags";
 
     private final TagService tagService;
     private final TagMapper tagMapper;

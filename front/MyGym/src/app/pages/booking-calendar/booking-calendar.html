@@ -1,0 +1,75 @@
+  <button mat-stroked-button color="primary" (click)="goBack()">
+  ← Retour
+</button>
+<div class="booking-calendar">
+  <mat-card class="equipment-info-card" *ngIf="equipment">
+    <mat-card-content>
+      <div class="equipment-header">
+        <div class="equipment-image">
+          <img [src]="equipment.imageUrl" [alt]="equipment.nom" />
+        </div>
+        <div class="equipment-details">
+          <h2>{{ equipment.nom }}</h2>
+          <p class="equipment-type">
+            <mat-icon>category</mat-icon>
+            {{ equipment.type }}
+          </p>
+          <div class="equipment-tags" *ngIf="equipment.tagNames && equipment.tagNames.length > 0">
+            <mat-chip-listbox>
+              <mat-chip *ngFor="let tag of equipment.tagNames">{{ tag }}</mat-chip>
+            </mat-chip-listbox>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="section-title">
+    <h3>Réservation des créneaux</h3>
+  </div>
+
+  <div class="calendar-header">
+    <div class="time-column">Heures</div>
+    <div class="day-column" *ngFor="let day of weekSchedule">
+      <div class="day-name">{{ day.dayName }}</div>
+      <div class="day-date">{{ day.dayNumber }}/{{ getMonthNumber(day.date) }}</div>
+    </div>
+  </div>
+
+  <div class="calendar-grid">
+    <div class="time-slots" *ngFor="let hour of hours">
+      <div class="time-label">{{ hour }}:00</div>
+      <div class="slot-row">
+        <mat-card
+          class="time-slot"
+          *ngFor="let day of weekSchedule"
+          [class.booked]="getTimeSlot(day, hour).isBooked"
+          [class.available]="!getTimeSlot(day, hour).isBooked"
+          (click)="onSlotClick(day, hour)"
+        >
+          <mat-card-content>
+            <div class="slot-content">
+              <mat-icon *ngIf="!getTimeSlot(day, hour).isBooked">check_circle</mat-icon>
+              <mat-icon *ngIf="getTimeSlot(day, hour).isBooked">block</mat-icon>
+              <span *ngIf="!getTimeSlot(day, hour).isBooked" class="available-text">
+                Libre
+              </span>
+              <span *ngIf="getTimeSlot(day, hour).isBooked" class="booked-text">
+                Réservé
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <mat-card class="status-card" *ngIf="statusMessage">
+    <mat-card-content>
+      <div class="status-message">
+        <mat-icon>info</mat-icon>
+        {{ statusMessage }}
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
